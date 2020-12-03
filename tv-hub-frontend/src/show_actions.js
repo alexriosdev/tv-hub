@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
-  showPOST();
-  // showDELETE(5); 
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   // showPOST();
+//   // showDELETE(5); 
+// });
 
 const SHOWS_URL = 'http://localhost:3000/shows';
 

@@ -1,28 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-  renderSearchForm();
-  formListener();
-});
-
 // Dirty Way to Create Elements, Does Not Mantain Permanence
 const renderSearchForm = () => {
   const searchForm = document.querySelector('#search-form');
   const formContent = `
   <form action="/action_page.php">
-    <label>Search TV Show:</label><br>
-    <input type="text" id="name" value="bones"><br>
-    <input type="submit" value="Submit">
+    <label class="label">Search TV Show:</label>
+    <input type="text" id="name" value="bones" class="input"><br>
+    <input type="submit" value="Search" class="button is-success">
   </form> 
   `;
-  searchForm.innerHTML = formContent;  
+  searchForm.innerHTML = formContent;
+
+  searchListener();  
 }
 
 // Add Listener To The Form
-const formListener  = () => {
+const searchListener  = () => {
   const searchForm = document.querySelector('#search-form');
   const searchDisplay = document.querySelector('#search-display');
 
   searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+    event.preventDefault();    
     searchDisplay.innerHTML = ''; // Clear the previous cards
     const input = event.target[0].value;
     getAPIFetch(input);
@@ -44,30 +41,30 @@ const getAPIFetch = (input) => {
 const renderAPI = (show) => {
   // console.log(show)
   const displayCard = document.createElement('div');
-  displayCard.class = 'display-card';
+  displayCard.className = 'box';
 
   const searchContent = `
-    <div><h3>${show.name}</h3></div>
+  <form action="/action_page.php">
+    <div class="title is-3">${show.name}</div>
     <div><img src="${show.image.medium}" width="30%" height="30%"></div>
     <div><strong>Genres</strong> ${show.genres.toString()}</div>
     <div><strong>Premiered</strong> ${show.premiered}</div>
     <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
-    <div><button type="button">Save Show!</button></div>
-  `;  
+    <input type="hidden" value="${show.id}">
+    <input type="submit" value="Save Show" class="button is-success">
+  </form> 
+  `;
+
   displayCard.innerHTML = searchContent;
 
   const searchDisplay = document.querySelector('#search-display');
   searchDisplay.appendChild(displayCard);
 
-  buttonListener();
-  
-}
-
-const buttonListener = () => {
-  const saveBtn = document.querySelector('button');
-  saveBtn.addEventListener('click', () => {
-    console.log('Feature Not Implemented Yet.')
-  })
+  displayCard.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const show_id = event.target[0].value;
+    console.log(`Only save this show id [${show_id}] to the local database!`)
+  });  
 }
 
 // CLEAN WAY TO CREATE ELEMENTS
