@@ -1,23 +1,29 @@
 class ShowsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  before_action :find_show
 
   def index
     @shows = Show.all
-    render :json => { :shows => @shows }, :status => :ok
+    render json: @shows
+  end
+
+  def create
+    @show = Show.find_or_create_by(strong_params)
+    render json: @show
   end
   
-  # # Save Show to DB 
-  # def create
-  #   @show = Show.create(show_params)
-  #   render json: @show
-  # end
+  def destroy
+    Show.delete(@show)
+  end
 
-  # def show
-  #   @show = Show.find(params[:id])
-  #   render json: @show
-  # end
+  private
 
-  # def show_params
-  #   params.require(:show).permit(:name, :genre, :premiered, :image, :official_site)
-  # end
+  def find_show
+    @show = Show.find_by(id: params[:id])
+  end
+
+  def strong_params
+    params.require(:show).permit(:name, :genre, :premiered, :image, :official_site)
+  end
 
 end

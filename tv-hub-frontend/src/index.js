@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // const input = 'game of thrones';
 // const API_URL = `http://api.tvmaze.com/search/shows?q=${input}`;
-const API_URL = `https://api.tvmaze.com/search/shows?q=`;
+// const API_URL = `https://api.tvmaze.com/search/shows?q=`;
 
 const SHOWS_URL = `http://localhost:3000/shows`;
 const USERS_URL = `http://localhost:3000/users`;
@@ -52,7 +52,7 @@ const renderUser = (user) => {
 }
 
 
-// 
+
 const handleForm  = () => {
   const showForm = document.querySelector('#show-form');
 
@@ -63,38 +63,3 @@ const handleForm  = () => {
   });
 
 }
-
-// Gets Show Data from API
-const getAPIFetch = (input) => {
-  fetch(`${API_URL}${input}`)
-    .then( (response) => response.json() )
-    .then( (array) => {
-      array.forEach(data => {
-        console.log(data)
-        renderAPI(data)
-      });      
-    });
-}
-
-const renderAPI = (data) => {
-  const nameNode = document.createElement('div');
-  nameNode.innerText = data.show.name;
-
-  const imgNode = document.createElement('img');
-  imgNode.src = data.show.image.medium;
-
-  const parentNode = document.querySelector('#content');
-  parentNode.appendChild(nameNode);
-  parentNode.appendChild(imgNode);
-}
-
-
-
-
-
-
-
-
-// GET DATA FROM OWN SERVER
-//  
-// GET DATA FROM API
