@@ -1,11 +1,11 @@
 // Dirty Way to Create Elements, Does Not Mantain Permanence
 const renderSearchForm = () => {
-  const searchForm = document.querySelector('#search-form');
+  const searchForm = document.querySelector('#search-form');  
   const formContent = `
   <form action="/action_page.php">
     <label class="label">Search TV Show:</label>
     <input type="text" id="name" value="bones" class="input"><br>
-    <input type="submit" value="Search" class="button is-success">
+    <input type="submit" value="Search" class="button is-info">
   </form> 
   `;
   searchForm.innerHTML = formContent;
@@ -17,29 +17,31 @@ const renderSearchForm = () => {
 const searchListener  = () => {
   const searchForm = document.querySelector('#search-form');
   const searchDisplay = document.querySelector('#search-display');
+  const userCollection = document.querySelector('#user-collection');
 
   searchForm.addEventListener('submit', (event) => {
     event.preventDefault();    
-    searchDisplay.innerHTML = ''; // Clear the previous cards
+    searchDisplay.innerHTML = '';
+    userCollection.innerHTML = '';
     const input = event.target[0].value;
     getAPIFetch(input);
   });
 }
 
-// Gets Show Data from API
+// Get Show Data from API
 const getAPIFetch = (input) => {
   fetch(`https://api.tvmaze.com/search/shows?q=${input}`)
     .then( (response) => response.json() )
     .then( (objArray) => {
       objArray.forEach(data => {
-        renderAPI(data.show)
+        // console.log(data.show);
+        renderAPI(data.show);
       });      
     });
 }
 
 // Dirty Way to Render Elements, Helpful for fast Testing
 const renderAPI = (show) => {
-  // console.log(show)
   const displayCard = document.createElement('div');
   displayCard.className = 'box';
 
@@ -55,7 +57,7 @@ const renderAPI = (show) => {
     <input type="hidden" value="${show.genres.toString()}">
     <input type="hidden" value="${show.premiered}">
     <input type="hidden" value="${show.officialSite}">
-    <input type="submit" value="Save Show" class="button is-success">
+    <input type="submit" value="Add To Collection" class="button is-info">
   </form> 
   `;
 

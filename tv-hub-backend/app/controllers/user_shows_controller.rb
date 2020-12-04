@@ -3,7 +3,7 @@ class UserShowsController < ApplicationController
   before_action :find_user_show
 
   def index
-    @user_shows = UserShow.all
+    @user_shows = UserShow.all 
     render json: @user_shows
   end
 

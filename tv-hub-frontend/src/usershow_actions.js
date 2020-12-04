@@ -1,9 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-  // userShowPOST();
-  // userShowPATCH(3); 
-  // userShowDELETE(5); 
-// });
-
 const US_URL = 'http://localhost:3000/user_shows';
 
 // These actions should be available AFTER a user has saved the show!
@@ -12,7 +6,7 @@ const userShowPOST = (user_id, show_id) => {
     user_id: user_id,
     show_id: show_id,
     notes: 'Share your thoughts here',
-    rating: 0,
+    rating: 3,
     status: 'still watching'
   }
   options = {
@@ -30,7 +24,7 @@ const userShowPOST = (user_id, show_id) => {
 const userShowPATCH = (us_id) => {
   data = {
     notes: 'This is a patch!',
-    rating: 00000,
+    rating: 1,
     status: 'echo echo'
   }
   options = {
