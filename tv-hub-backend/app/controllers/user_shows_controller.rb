@@ -7,6 +7,10 @@ class UserShowsController < ApplicationController
     render json: @user_shows
   end
 
+  def show
+    render json: @user_show
+  end
+
   def create
     @user_show = UserShow.find_or_create_by(strong_params)
     render json: @user_show

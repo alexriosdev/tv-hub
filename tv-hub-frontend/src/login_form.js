@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   renderLoginForm();
+  // renderSearchForm();
 });
 
 // Dirty Way to Create Elements, Does Not Mantain Permanence
@@ -66,7 +67,7 @@ const renderWelcome = (username) => {
   const formContent = `
   <form action="/action_page.php">
     <label class="title is-3">Welcome, ${username}!</label><br>
-    <input type="submit" value="Log Out" class="button is-warning">
+    <input type="submit" value="Log Out" class="button is-warning is-small">
   </form> 
   `;
   logoutForm.innerHTML = formContent;
@@ -78,7 +79,6 @@ const renderWelcome = (username) => {
   });
 
   renderSearchForm();
-
 }
 
 const clearElements  = () => {
@@ -89,6 +89,5 @@ const clearElements  = () => {
   searchForm.innerHTML = '';
   searchDisplay.innerHTML = '';
   logoutForm.innerHTML = '';
+  USER_ID = '';
 }
-
-

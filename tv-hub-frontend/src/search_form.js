@@ -50,7 +50,11 @@ const renderAPI = (show) => {
     <div><strong>Genres</strong> ${show.genres.toString()}</div>
     <div><strong>Premiered</strong> ${show.premiered}</div>
     <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
-    <input type="hidden" value="${show.id}">
+    <input type="hidden" value="${show.name}">
+    <input type="hidden" value="${show.image.medium}">
+    <input type="hidden" value="${show.genres.toString()}">
+    <input type="hidden" value="${show.premiered}">
+    <input type="hidden" value="${show.officialSite}">
     <input type="submit" value="Save Show" class="button is-success">
   </form> 
   `;
@@ -62,8 +66,8 @@ const renderAPI = (show) => {
 
   displayCard.addEventListener('submit', (event) => {
     event.preventDefault();
-    const show_id = event.target[0].value;
-    console.log(`Only save this show id [${show_id}] to the local database!`)
+    const show_data = event.target;
+    createShowObject(show_data); // Goes to show_action.js  
   });  
 }
 
