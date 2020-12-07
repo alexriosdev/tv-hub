@@ -19,9 +19,18 @@ const renderCollection = (show) => {
 
   const displayContent = `
   <div class="title is-3">${show.name}</div>
-  <div><img src="${show.image}" width="30%" height="30%"></div>
-  <div><strong>Genres</strong> ${show.genre}</div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column is-half"><img src="${show.image}"></div>
+    <div class="column is-half"><strong>Summary</strong> ${show.summary}</div>
+  </div>
+  <div><strong>Language</strong> ${show.language}</div>
+  <div><strong>Type</strong> ${show.show_type}</div>
+  <div><strong>Genres</strong> ${show.genres}</div>
+  <div><strong>Network</strong> ${show.network}</div>
   <div><strong>Premiered</strong> ${show.premiered}</div>
+  <div><strong>Status</strong> ${show.status}</div>
+  <div><strong>Rating</strong> ${show.rating}</div>
+  <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
   <div><a href="${show.official_site}"><strong>Official Site</strong></a></div>
   <br>
   <input type="hidden" value="${show.id}">
@@ -35,8 +44,7 @@ const renderCollection = (show) => {
 }
 
 // Render the UserShow elements
-const renderUserNotes = (us) => {
-  console.log('TEST')
+const renderUserNotes = (us) => {  
   const displayCard = document.createElement('div');
 
   const optionsContent = `
@@ -45,7 +53,7 @@ const renderUserNotes = (us) => {
     <textarea class="textarea" rows="2" cols="40">${us.notes}</textarea>
     <div class="label">Rating</div>
     <select class="select">
-      <option value="" selected disabled hidden>${starConverter(us.rating)}</option>
+      <option value="${us.rating}" selected disabled hidden>${starConverter(us.rating)}</option>
       <option value="1">⭐</option>
       <option value="2">⭐⭐</option>
       <option value="3">⭐⭐⭐</option>
@@ -54,11 +62,12 @@ const renderUserNotes = (us) => {
     </select>
     <div class="label">Status</div>
     <select class="select">
-      <option value="" selected disabled hidden>${us.status}</option>
+      <option value="${us.status}" selected disabled hidden>${us.status}</option>
       <option value="still watching">still watching</option>
       <option value="finished watching">finished watching</option>
     </select>
     <br><br>
+    <div class="block">
     <div><input type="submit" value="Update Notes" class="button is-info"></div>
   </form> 
   `;
@@ -71,8 +80,7 @@ const renderUserNotes = (us) => {
   displayCard.addEventListener('submit', (event) => {
     event.preventDefault();
     const us_data = event.target;
-    console.log("patch function goes here ");
-    console.log(us_data); 
+    userShowPATCH(us_data, us.id);
   });  
 }
 

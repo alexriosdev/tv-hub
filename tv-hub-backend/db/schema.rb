@@ -14,9 +14,16 @@ ActiveRecord::Schema.define(version: 2020_12_02_165940) do
 
   create_table "shows", force: :cascade do |t|
     t.string "name"
-    t.string "genre"
-    t.string "premiered"
     t.string "image"
+    t.text "summary"
+    t.string "language"
+    t.string "show_type"
+    t.string "genres"
+    t.string "network"
+    t.string "premiered"
+    t.string "status"
+    t.float "rating"
+    t.integer "runtime"
     t.string "official_site"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

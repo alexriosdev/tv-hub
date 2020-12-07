@@ -14,9 +14,16 @@ UserShow.destroy_all
   Show.create(
     name: Faker::Movie.title,
     image: Faker::Avatar.image,
-    genre: Faker::Music.genre,
+    summary: Faker::Lorem.paragraph,
+    language: Faker::Music.genre,
+    show_type: Faker::Gender.type,
+    genres: Faker::Music.genre,
+    network: Faker::Nation.nationality,
     premiered: Faker::Date.between(from: '2014-09-23', to: '2014-09-25'),
-    official_site: 'google.com',
+    status: 'Running',
+    rating: 7.5,
+    runtime: 30,
+    official_site: 'www.google.com'
   )
 }
 

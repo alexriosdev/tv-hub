@@ -21,11 +21,12 @@ const userShowPOST = (user_id, show_id) => {
 }
 
 // Update the Saved Show
-const userShowPATCH = (us_id) => {
+const userShowPATCH = (data, us_id) => {
+  console.log('Patching Show..');
   data = {
-    notes: 'This is a patch!',
-    rating: 1,
-    status: 'echo echo'
+    notes: data[0].value,
+    rating: data[1].value,
+    status: data[2].value
   }
   options = {
     method: 'PATCH',

@@ -46,20 +46,39 @@ const renderAPI = (show) => {
   displayCard.className = 'box';
 
   const searchContent = `
+  <div class="title is-3">${show.name}</div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column is-half"><img src="${show.image.medium}"></div>
+    <div class="column is-half"><strong>Summary</strong> ${show.summary}</div>
+  </div>
+  <div><strong>Language</strong> ${show.language}</div>
+  <div><strong>Type</strong> ${show.type}</div>
+  <div><strong>Genres</strong> ${show.genres.join(' | ')}</div>
+  <div><strong>Network</strong> ${show.network.name}</div>
+  <div><strong>Premiered</strong> ${show.premiered}</div>
+  <div><strong>Status</strong> ${show.status}</div>
+  <div><strong>Rating</strong> ${show.rating.average}</div>
+  <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
+  <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
   <form action="/action_page.php">
-    <div class="title is-3">${show.name}</div>
-    <div><img src="${show.image.medium}" width="30%" height="30%"></div>
-    <div><strong>Genres</strong> ${show.genres.toString()}</div>
-    <div><strong>Premiered</strong> ${show.premiered}</div>
-    <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
-    <input type="hidden" value="${show.name}">
-    <input type="hidden" value="${show.image.medium}">
-    <input type="hidden" value="${show.genres.toString()}">
-    <input type="hidden" value="${show.premiered}">
-    <input type="hidden" value="${show.officialSite}">
     <input type="submit" value="Add To Collection" class="button is-info">
   </form> 
   `;
+
+  const show_obj = {
+    name: show.name,
+    image: show.image.medium,
+    summary: show.summary,
+    language: show.language,
+    show_type: show.type,
+    genres: show.genres.join(' | '),
+    network: show.network.name,
+    premiered: show.premiered,
+    status: show.status,
+    rating: show.rating.average,
+    runtime: show.runtime,
+    official_site: show.officialSite
+  }
 
   displayCard.innerHTML = searchContent;
 
@@ -68,8 +87,8 @@ const renderAPI = (show) => {
 
   displayCard.addEventListener('submit', (event) => {
     event.preventDefault();
-    const show_data = event.target;
-    createShowObject(show_data); // Goes to show_action.js  
+    console.log(`Saving show ${show_obj.name}...`);
+    showPOST(show_obj); // Goes to show_action.js  
   });  
 }
 

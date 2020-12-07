@@ -27,7 +27,7 @@ class ShowsController < ApplicationController
   end
 
   def strong_params
-    params.require(:show).permit(:name, :genre, :premiered, :image, :official_site)
+    params.require(:show).permit(:name, :image, :summary, :language, :show_type, :genres, :network, :premiered, :status, :rating, :runtime, :official_site)
   end
 
 end
