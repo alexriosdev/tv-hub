@@ -73,7 +73,7 @@ const renderWelcome = (username) => {
   logoutForm.innerHTML = formContent;
 
   logoutForm.addEventListener('submit', (event) => {
-    setTimeout( () => window.location.reload() );
+    setTimeout( () => { window.location.reload() }, 100 );
     setTimeout(); // Refreshes the page
   });
 

@@ -67,8 +67,10 @@ const renderUserNotes = (us) => {
       <option value="finished watching">finished watching</option>
     </select>
     <br><br>
-    <div class="block">
-    <div><input type="submit" value="Update Notes" class="button is-info"></div>
+    <div class="level is-mobile">
+      <div class="level-left"><input type="submit" value="Update Notes" class="button is-info"></div>
+      <div id="button-id-${us.id}" class="level-right"><button class="button is-danger is-right">Delete</button></div>
+    </div>
   </form> 
   `;
 
@@ -81,7 +83,16 @@ const renderUserNotes = (us) => {
     event.preventDefault();
     const us_data = event.target;
     userShowPATCH(us_data, us.id);
-  });  
+  });
+
+  const deleteBtn = document.querySelector(`#button-id-${us.id}`);
+
+  deleteBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log(`Deleting Item [${us.id}]...`);    
+    showOptions.parentNode.parentNode.removeChild(showOptions.parentNode); // Clears the items from view    
+    userShowDELETE(us.id);
+  });
 }
 
 // Convert the rating value to stars

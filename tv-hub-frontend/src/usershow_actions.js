@@ -39,7 +39,7 @@ const userShowPATCH = (data, us_id) => {
   fetch(`${US_URL}/${us_id}`, options)
 }
 
-const userShowDELETE = (us_id) => {  
+const userShowDELETE = (us_id) => {    
   options = {
     method: 'DELETE',
     headers: {
@@ -48,4 +48,6 @@ const userShowDELETE = (us_id) => {
     }
   }
   fetch(`${US_URL}/${us_id}`, options)
+    .then( (response) => response.json )
+    .then( (data) => console.log(`Item [${us_id}] has been deleted!`) )
 }
