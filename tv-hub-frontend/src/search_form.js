@@ -3,9 +3,10 @@ const renderSearchForm = () => {
   const searchForm = document.querySelector('#search-form');  
   const formContent = `
   <form action="/action_page.php">
-    <label class="label">Search TV Show:</label>
-    <input type="text" id="name" value="bones" class="input"><br>
-    <input type="submit" value="Search" class="button is-info">
+    <div class="field has-addons">
+      <div class="control"><input type="text" id="name" placeholder="Search TV Show"class="input"></div>
+      <div class="control"><input type="submit" value="Search" class="button"></div>
+    </div>
   </form> 
   `;
   searchForm.innerHTML = formContent;
@@ -24,6 +25,7 @@ const searchListener  = () => {
     searchDisplay.innerHTML = '';
     userCollection.innerHTML = '';
     const input = event.target[0].value;
+    event.target.reset(); 
     getAPIFetch(input);
   });
 }
@@ -91,6 +93,7 @@ const renderAPI = (show) => {
     showPOST(show_obj); // Goes to show_action.js  
   });  
 }
+
 
 // CLEAN WAY TO CREATE ELEMENTS
 // const renderSearchForm = () => {
