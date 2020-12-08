@@ -18,11 +18,12 @@ const renderSearchForm = () => {
 const searchListener  = () => {
   const searchForm = document.querySelector('#search-form');
   const searchDisplay = document.querySelector('#search-display');
+
   const userCollection = document.querySelector('#user-collection');
 
   searchForm.addEventListener('submit', (event) => {
     event.preventDefault();    
-    searchDisplay.innerHTML = '';
+    searchDisplay.innerHTML = '<div class="section"><div class="title is-2 has-text-centered">Search Results</div></div>';
     userCollection.innerHTML = '';
     const input = event.target[0].value;
     event.target.reset(); 
@@ -63,8 +64,10 @@ const renderAPI = (show) => {
   <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
   <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
   <form action="/action_page.php">
-    <input type="submit" value="Add To Collection" class="button is-info">
-  </form> 
+    <div class="columns is-mobile is-centered">
+      <input type="submit" value="Add To Collection" class="button is-info">    
+    </div>    
+  </form>
   `;
 
   const show_obj = {
@@ -87,13 +90,21 @@ const renderAPI = (show) => {
   const searchDisplay = document.querySelector('#search-display');
   searchDisplay.appendChild(displayCard);
 
+  // Add a toggle
   displayCard.addEventListener('submit', (event) => {
     event.preventDefault();
-    console.log(`Saving show ${show_obj.name}...`);
-    showPOST(show_obj); // Goes to show_action.js  
+    const inputElement = event.target[0];    
+    if (inputElement.value === 'Add To Collection') {      
+      inputElement.parentNode.innerHTML = `<input type="submit" value="Remove From Collection" class="button is-danger">`;
+      console.log(`Saving show ${show_obj.name}...`);
+      showPOST(show_obj); // Goes to show_action.js  
+    } else {
+      inputElement.parentNode.innerHTML = `<input type="submit" value="Add To Collection" class="button is-info">`;
+      console.log(`Deleting Item [${US_ID}]...`);
+      userShowDELETE(US_ID);
+    }
   });  
 }
-
 
 // CLEAN WAY TO CREATE ELEMENTS
 // const renderSearchForm = () => {

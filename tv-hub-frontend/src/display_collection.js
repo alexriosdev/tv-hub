@@ -1,7 +1,7 @@
 // Gets Show Data from Local DB
 const getCollection = (user_id) => {
   const userCollection = document.querySelector('#user-collection');
-  userCollection.innerHTML = `<div class="title is-2 has-text-centered">Here is your collection</div>`;
+  userCollection.innerHTML = `<div class="section"><div class="title is-2 has-text-centered">My Collection</div></div>`;
 
   fetch(`http://localhost:3000/users/${user_id}`)
     .then( (response) => response.json() )
@@ -82,6 +82,7 @@ const renderUserNotes = (us) => {
   displayCard.addEventListener('submit', (event) => {
     event.preventDefault();
     const us_data = event.target;
+    console.log(`Updating Item [${us.id}]...`);
     userShowPATCH(us_data, us.id);
   });
 

@@ -118,5 +118,5 @@ const renderNavbar = (username) => {
         event.preventDefault();    
         getCollection(USER_ID);
       })
-    );  
+    );
 }
