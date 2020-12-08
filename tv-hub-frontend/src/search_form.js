@@ -46,28 +46,32 @@ const getAPIFetch = (input) => {
 // Dirty Way to Render Elements, Helpful for fast Testing
 const renderAPI = (show) => {
   const displayCard = document.createElement('div');
-  displayCard.className = 'box';
+  displayCard.className = 'columns is-centered';
 
   const searchContent = `
-  <div class="title is-3">${show.name}</div>
-  <div class="columns is-multiline is-mobile">
-    <div class="column is-half"><img src="${show.image.medium}"></div>
-    <div class="column is-half"><strong>Summary</strong> ${show.summary}</div>
+  <div class="column is-10">
+    <div class="box">
+      <div class="title is-2">${show.name}</div>
+      <div class="columns is-multiline is-mobile">
+        <div class="column is-one-third image"><img src="${show.image.medium}"></div>
+        <div class="column is-half"><strong class="title is-5">Synopsis</strong> ${show.summary}</div>
+      </div>
+      <div><strong>Language</strong> ${show.language}</div>
+      <div><strong>Type</strong> ${show.type}</div>
+      <div><strong>Genres</strong> ${show.genres.join(' | ')}</div>
+      <div><strong>Network</strong> ${show.network.name}</div>
+      <div><strong>Premiered</strong> ${show.premiered}</div>
+      <div><strong>Status</strong> ${show.status}</div>
+      <div><strong>Rating</strong> ${show.rating.average}</div>
+      <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
+      <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
+      <form action="/action_page.php">
+        <div class="columns is-mobile is-centered">
+          <input type="submit" value="Add To Collection" class="button is-info">    
+        </div>    
+      </form>
+    </div>
   </div>
-  <div><strong>Language</strong> ${show.language}</div>
-  <div><strong>Type</strong> ${show.type}</div>
-  <div><strong>Genres</strong> ${show.genres.join(' | ')}</div>
-  <div><strong>Network</strong> ${show.network.name}</div>
-  <div><strong>Premiered</strong> ${show.premiered}</div>
-  <div><strong>Status</strong> ${show.status}</div>
-  <div><strong>Rating</strong> ${show.rating.average}</div>
-  <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
-  <div><a href="${show.officialSite}"><strong>Official Site</strong></a></div>
-  <form action="/action_page.php">
-    <div class="columns is-mobile is-centered">
-      <input type="submit" value="Add To Collection" class="button is-info">    
-    </div>    
-  </form>
   `;
 
   const show_obj = {

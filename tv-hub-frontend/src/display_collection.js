@@ -15,26 +15,30 @@ const getCollection = (user_id) => {
 // Renders the Show Elements
 const renderCollection = (show) => {
   const displayCard = document.createElement('div');
-  displayCard.className = 'box';
+  displayCard.className = 'columns is-centered';
 
   const displayContent = `
-  <div class="title is-3">${show.name}</div>
-  <div class="columns is-multiline is-mobile">
-    <div class="column is-half"><img src="${show.image}"></div>
-    <div class="column is-half"><strong>Summary</strong> ${show.summary}</div>
+  <div class="column is-10">
+    <div class="box">
+      <div class="title is-2">${show.name}</div>
+      <div class="columns is-multiline is-mobile">
+        <div class="column is-one-third image"><img src="${show.image}"></div>
+        <div class="column is-half"><strong class="title is-5">Synopsis</strong>${show.summary}</div>
+      </div>
+      <div><strong>Language</strong> ${show.language}</div>
+      <div><strong>Type</strong> ${show.show_type}</div>
+      <div><strong>Genres</strong> ${show.genres}</div>
+      <div><strong>Network</strong> ${show.network}</div>
+      <div><strong>Premiered</strong> ${show.premiered}</div>
+      <div><strong>Status</strong> ${show.status}</div>
+      <div><strong>Rating</strong> ${show.rating}</div>
+      <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
+      <div><a href="${show.official_site}"><strong>Official Site</strong></a></div>
+      <br>
+      <input type="hidden" value="${show.id}">
+      <div id="show-id-${show.id}" class="box has-background-light"></div>
+    </div>
   </div>
-  <div><strong>Language</strong> ${show.language}</div>
-  <div><strong>Type</strong> ${show.show_type}</div>
-  <div><strong>Genres</strong> ${show.genres}</div>
-  <div><strong>Network</strong> ${show.network}</div>
-  <div><strong>Premiered</strong> ${show.premiered}</div>
-  <div><strong>Status</strong> ${show.status}</div>
-  <div><strong>Rating</strong> ${show.rating}</div>
-  <div><strong>Runtime</strong> ${show.runtime} Minutes</div>
-  <div><a href="${show.official_site}"><strong>Official Site</strong></a></div>
-  <br>
-  <input type="hidden" value="${show.id}">
-  <div id="show-id-${show.id}" class="box has-background-light"></div>
   `;
 
   displayCard.innerHTML = displayContent;
@@ -50,22 +54,38 @@ const renderUserNotes = (us) => {
   const optionsContent = `
   <form action="/action_page.php">
     <div class="title is-4">Personal Notes</div>
-    <textarea class="textarea" rows="2" cols="40">${us.notes}</textarea>
+    <div class="field">
+      <div class="control">
+        <textarea class="textarea" rows="2" cols="40">${us.notes}</textarea>
+      </div>
+    </div>
     <div class="label">Rating</div>
-    <select class="select">
-      <option value="${us.rating}" selected disabled hidden>${starConverter(us.rating)}</option>
-      <option value="1">⭐</option>
-      <option value="2">⭐⭐</option>
-      <option value="3">⭐⭐⭐</option>
-      <option value="4">⭐⭐⭐⭐</option>
-      <option value="5">⭐⭐⭐⭐⭐</option>
-    </select>
+    <div class="field>
+      <div class="control">
+        <div class="select">
+          <select>
+            <option value="${us.rating}" selected disabled hidden>${starConverter(us.rating)}</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div class="label">Status</div>
-    <select class="select">
-      <option value="${us.status}" selected disabled hidden>${us.status}</option>
-      <option value="still watching">still watching</option>
-      <option value="finished watching">finished watching</option>
-    </select>
+    <div class="field>
+      <div class="control">
+        <div class="select">
+          <select>
+            <option value="${us.status}" selected disabled hidden>${us.status}</option>
+            <option value="still watching">still watching</option>
+            <option value="finished watching">finished watching</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <br><br>
     <div class="level is-mobile">
       <div class="level-left"><input type="submit" value="Update Notes" class="button is-info"></div>
