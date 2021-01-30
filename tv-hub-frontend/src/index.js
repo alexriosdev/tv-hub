@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   handleForm();
 });
 
+
+
 // const input = 'game of thrones';
 // const API_URL = `http://api.tvmaze.com/search/shows?q=${input}`;
 // const API_URL = `https://api.tvmaze.com/search/shows?q=`;
